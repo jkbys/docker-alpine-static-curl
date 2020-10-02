@@ -1,5 +1,7 @@
+ARG BIND9_VERSION=9.11.23
+
 FROM alpine:3.12 as builder
-ENV BIND9_VERSION=9.11.23
+ARG BIND9_VERSION
 RUN apk update && apk add --no-cache alpine-sdk linux-headers && \
   cd /tmp/ && \
   wget https://downloads.isc.org/isc/bind9/${BIND9_VERSION}/bind-${BIND9_VERSION}.tar.gz && \
@@ -15,5 +17,6 @@ RUN apk update && apk add --no-cache alpine-sdk linux-headers && \
   strip --strip-all bin/dig/dig
 
 FROM alpine:3.12
+ARG BIND9_VERSION
 COPY --from=builder /tmp/bind-${BIND9_VERSION}/bin/dig/dig /usr/local/bin/
 CMD ["/bin/sh"]
