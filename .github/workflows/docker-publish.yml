@@ -1,17 +1,17 @@
 name: Docker
 
 on:
-  push:
-    branches:
-      - $default-branch
+  #push:
+  #  branches:
+  #    - $default-branch
 
-    tags:
-      - v*
+  #  tags:
+  #    - v*
 
-  pull_request:
+  #pull_request:
 
   workflow_dispatch:
- 
+
 env:
   IMAGE_NAME: alpine-static-dig
 
@@ -59,8 +59,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          #platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
-          platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+          platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
+          #platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
           push: true
           tags: |
             jkbys/alpine-static-dig:latest
