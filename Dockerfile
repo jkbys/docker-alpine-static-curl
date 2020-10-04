@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache alpine-sdk linux-headers && \
     --disable-symtable \
     --disable-threads \
     --disable-backtrace && \
-  cd lib/dns/ &&
+  cd lib/dns/ && \
   make && \
   cd ../bind9/ && \
   make && \
