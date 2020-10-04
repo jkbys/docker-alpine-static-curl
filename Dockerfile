@@ -14,8 +14,20 @@ RUN apk update && apk add --no-cache alpine-sdk linux-headers && \
     --disable-symtable \
     --disable-threads \
     --disable-backtrace && \
+  cd lib/dns/ &&
   make && \
-  strip --strip-all bin/dig/dig
+  cd ../bind9/ && \
+  make && \
+  cd ../isc && \
+  make && \
+  cd ../isccfg/ && \
+  make && \
+  cd ../lwres/ && \
+  make && \
+  cd ../../bin/dig && \
+  make && \
+  strip --strip-all dig && \
+  ./dig @resolver1.opendns.com IN A myip.opendns.com +short
 
 FROM alpine:3.12
 ARG BIND9_VERSION
